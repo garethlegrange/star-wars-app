@@ -1,23 +1,19 @@
 "use server";
 
-export async function getFilms() {
-  const response = await fetch("https://swapi.dev/api/films/");
-
-  console.log(response);
-
-  if (!response.ok) {
+export const fetchFilms = async () => {
+  try {
+    const response = await fetch("https://swapi.dev/api/films/");
+    return response.json();
+  } catch (error) {
     throw new Error("Network response was not ok");
   }
+};
 
-  return response.json();
-}
-
-export async function getFilm(id: number) {
-  const response = await fetch(`https://swapi.dev/api/films/${id}/`);
-
-  if (!response.ok) {
+export const fetchFilm = async (id: string) => {
+  try {
+    const response = await fetch(`https://swapi.dev/api/films/${id}/`);
+    return response.json();
+  } catch (error) {
     throw new Error("Network response was not ok");
   }
-
-  return response.json();
-}
+};
