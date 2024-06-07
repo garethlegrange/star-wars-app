@@ -1,5 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchFilms, fetchFilm } from "@/server/actions";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import {
+  fetchFilms,
+  fetchFilm,
+  fetchTopics,
+  fetchTopic,
+} from "@/server/actions";
+
+// Star Wars API
 
 export const useFetchFilms = () => {
   return useQuery({
@@ -15,3 +22,17 @@ export const useFetchFilm = (id: string) => {
   });
 };
 
+// Unsplash API
+
+export const useFetchTopics = () => {
+  return useQuery({
+    queryKey: ["fetch-topics"],
+    queryFn: () => fetchTopics(),
+  });
+};
+
+export const useFetchTopic = (slug: string) => {
+  return useMutation({
+    mutationFn: () => fetchTopic(slug),
+  });
+};
