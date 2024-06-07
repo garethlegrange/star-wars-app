@@ -9,7 +9,7 @@ import imgSrc from "@/public/avatar.png";
 export default function Navbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" className="bg-green-400">
         <Toolbar>
           <IconButton
             size="large"
