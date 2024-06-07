@@ -2,13 +2,28 @@
 
 import { useFetchFilms } from "@/hooks";
 import FilmTable from "@/components/FilmTable";
+import Container from "@mui/material/Container";
 
 export default function Home() {
   const { data: films, isPending, isError } = useFetchFilms();
 
-  if (isError) return <p>Error</p>;
+  if (isError)
+    return (
+      <Container>
+        <p>Error</p>
+      </Container>
+    );
 
-  if (isPending) return <p>Loading...</p>;
+  if (isPending)
+    return (
+      <Container>
+        <p>Loading...</p>
+      </Container>
+    );
 
-  return <FilmTable films={films} />;
+  return (
+    <Container>
+      <FilmTable films={films} />
+    </Container>
+  );
 }

@@ -39,7 +39,6 @@ export default function FilmTable({ films }: { films: Films }) {
         <DataGrid
           rows={films.results}
           getRowId={(row) => row.episode_id}
-          rowCount={films.count}
           loading={!films.results.length}
           columns={columns}
           hideFooter

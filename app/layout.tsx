@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Providers from "@/components/Providers";
 import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
+import Box from "@mui/material/Box";
 
 export const metadata: Metadata = {
   title: "DigiCert Assesment",
@@ -17,8 +18,18 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <Navbar />
-          <main>{children}</main>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "100dvh",
+              gap: 4,
+              py: 4,
+            }}
+          >
+            <Navbar />
+            <main>{children}</main>
+          </Box>
         </Providers>
       </body>
     </html>
