@@ -33,8 +33,7 @@ export const fetchTopics = async () => {
   }
 };
 
-export const fetchTopic = async (slug: string) => {
-  // https://api.unsplash.com/topics/pastels/photos?client_id=SC4OdHkDLVwl-3soEmDkQR5yeII9eO5BraiLvZNiF-8
+export const fetchPhotos = async (slug: string) => {
   try {
     const response = await fetch(
       `https://api.unsplash.com/topics/${slug}/photos?client_id=${process.env.UNSPLASH_ACCESS_KEY}`
@@ -44,4 +43,26 @@ export const fetchTopic = async (slug: string) => {
     throw new Error("Network response was not ok");
   }
 };
+
+// export const fetchTopic = async (slug: string) => {
+//   try {
+//     const response = await fetch(
+//       `https://api.unsplash.com/topics/${slug}/?client_id=${process.env.UNSPLASH_ACCESS_KEY}`
+//     );
+//     return response.json();
+//   } catch (error) {
+//     throw new Error("Network response was not ok");
+//   }
+// };
+
+// export const fetchTopicPhotos = async (slug: string) => {
+//   try {
+//     const response = await fetch(
+//       `https://api.unsplash.com/topics/${slug}/photos?client_id=${process.env.UNSPLASH_ACCESS_KEY}`
+//     );
+//     return response.json();
+//   } catch (error) {
+//     throw new Error("Network response was not ok");
+//   }
+// };
 

@@ -15,7 +15,7 @@ const columns: GridColDef<Film>[] = [
     renderCell: (params) => {
       const urlParts = params.row.url.split("/").filter(Boolean);
       const id = urlParts[urlParts.length - 1];
-      return <Link href={`/movie/${id}`}>{params.row.title}</Link>;
+      return <Link href={`/movies/${id}`}>{params.row.title}</Link>;
     },
   },
   {

@@ -16,21 +16,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <Providers>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              minHeight: "100dvh",
-              gap: 4,
-              py: 4,
-            }}
-          >
-            <Navbar />
-            <main>{children}</main>
-          </Box>
-        </Providers>
+      <body id="__next">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

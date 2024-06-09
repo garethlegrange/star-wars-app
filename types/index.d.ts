@@ -21,3 +21,9 @@ export interface Films {
   previous: string;
   results: Film[];
 }
+
+export interface Topic {
+  id: number;
+  name: string;
+}
+
