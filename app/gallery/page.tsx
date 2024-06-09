@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useStore } from "@/store";
 import { useFetchTopics, useFetchPhotos } from "@/hooks";
 import Image from "next/image";
@@ -25,23 +25,28 @@ const Topics = () => {
   const { data: topics, isPending, isError } = useFetchTopics();
   const { topic: selected, setTopic } = useStore();
 
+  useEffect(() => {
+    if (topics && topics.length > 0) {
+      setTopic(topics[0].slug);
+    }
+  }, [topics, setTopic]);
+
   if (isPending) return <div>Loading...</div>;
 
   if (isError) return <div>Error...</div>;
 
   return (
-    <div className="sticky top-4 start-0 flex flex-col w-80">
+    <div className="sticky top-4 start-0 flex flex-col w-80 text-lg">
       {topics.map((topic: any) => (
         <a
           role="button"
           key={topic.id}
           onClick={() => setTopic(topic.slug)}
           className={`cursor-pointer ${
-            topic.slug === selected ? "text-indigo-700 font-bold" : ""
+            topic.slug === selected && "text-indigo-700 font-bold"
           }`}
         >
           {topic.title}
-          {/* <span>{topic.slug} === {selected}</span> */}
         </a>
       ))}
     </div>
@@ -63,11 +68,11 @@ const Images = () => {
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="columns-4 gap-4">
         {images.map((image: any) => (
           <div
             key={image.id}
-            className="max-h-80 max-w-full rounded-lg relative"
+            className="rounded-lg relative mb-4"
             onClick={handleOpen}
           >
             <Image
@@ -75,9 +80,10 @@ const Images = () => {
               blurDataURL={image.urls.small}
               placeholder="blur"
               alt={image.description || ""}
-              width={250}
-              height={250}
-              className="rounded-3xl object-cover"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="rounded-3xl w-full h-auto object-cover"
             />
           </div>
         ))}
@@ -123,7 +129,7 @@ const Modal = ({
 };
 
 const Carousel = ({ images }: { images: any[] }) => {
-  const [emblaRef] = useEmblaCarousel({ align: 'start' });
+  const [emblaRef] = useEmblaCarousel({ align: "start" });
 
   return (
     <div className="overflow-hidden w-96" ref={emblaRef}>

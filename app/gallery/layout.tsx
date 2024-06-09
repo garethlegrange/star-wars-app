@@ -8,7 +8,7 @@ export default function GalleryLayout({
       <nav className="px-4 py-2 backdrop-blur-md bg-white/30">
         <h1 className="m-0 text-base text-white">myPhoto</h1>
       </nav>
-      <div className="container mx-auto">{children}</div>
+      <div className="container mx-auto grow flex mb-8">{children}</div>
     </main>
   );
 }
