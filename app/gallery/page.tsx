@@ -31,7 +31,18 @@ const Topics = () => {
     }
   }, [topics, setTopic]);
 
-  if (isPending) return <div>Loading...</div>;
+  if (isPending) {
+    return (
+      <div className="sticky top-4 start-0 flex flex-col w-80 text-lg">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <div
+            key={index}
+            className="animate-pulse h-7 bg-indigo-500 mb-2"
+          ></div>
+        ))}
+      </div>
+    );
+  }
 
   if (isError) return <div>Error...</div>;
 
@@ -58,7 +69,17 @@ const Images = () => {
   const { data: images, isPending, isError } = useFetchPhotos(slug || "");
   const [isOpen, setIsOpen] = useState(false);
 
-  if (isPending) return <div>Loading...</div>;
+  if (isPending) {
+    return (
+      <div className="columns-4 gap-4">
+        {Array.from({ length: 8 }).map((_, index) => (
+          <div key={index} className="rounded-lg relative mb-4 animate-pulse">
+            <div className="bg-indigo-500 rounded-3xl w-full h-48"></div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   if (isError) return <div>Error</div>;
 
