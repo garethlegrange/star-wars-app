@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   fetchFilms,
   fetchFilm,
+  fetchCharacters,
   fetchTopics,
   fetchPhotos,
 } from "@/server/actions";
@@ -23,6 +24,13 @@ export const useFetchFilm = (id: string) => {
   });
 };
 
+export const useFetchCharacters = (id: string) => {
+  return useQuery({
+    queryKey: ["fetch-characters", id],
+    queryFn: () => fetchCharacters(id),
+  });
+};
+
 // Unsplash API
 
 export const useFetchTopics = () => {
@@ -39,27 +47,3 @@ export const useFetchPhotos = (slug: string) => {
     enabled: !!slug,
   });
 };
-
-
-
-// export const useFetchTopic = (slug: string) => {
-//   const queryClient = useQueryClient();
-
-//   return useMutation({
-//     mutationFn: () => fetchTopic(slug),
-//     onSuccess: () => {
-//       queryClient.invalidateQueries({ queryKey: ["fetch-topics"] });
-//     },
-//   });
-// };
-
-// export const useFetchTopicPhotos = (slug: string) => {
-//   const queryClient = useQueryClient();
-
-//   return useMutation({
-//     mutationFn: () => fetchTopic(slug),
-//     onSuccess: () => {
-//       queryClient.invalidateQueries({ queryKey: ["fetch-topics"] });
-//     },
-//   });
-// }

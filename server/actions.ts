@@ -20,6 +20,17 @@ export const fetchFilm = async (id: string) => {
   }
 };
 
+export const fetchCharacters = async (id: string) => {
+  try {
+    const response = await fetch(
+      `https://swapi.dev/api/people/${id}`
+    );
+    return response.json();
+  } catch (error) {
+    throw new Error("Network response was not ok");
+  }
+};
+
 // Unsplash API
 
 export const fetchTopics = async () => {
@@ -43,26 +54,4 @@ export const fetchPhotos = async (slug: string) => {
     throw new Error("Network response was not ok");
   }
 };
-
-// export const fetchTopic = async (slug: string) => {
-//   try {
-//     const response = await fetch(
-//       `https://api.unsplash.com/topics/${slug}/?client_id=${process.env.UNSPLASH_ACCESS_KEY}`
-//     );
-//     return response.json();
-//   } catch (error) {
-//     throw new Error("Network response was not ok");
-//   }
-// };
-
-// export const fetchTopicPhotos = async (slug: string) => {
-//   try {
-//     const response = await fetch(
-//       `https://api.unsplash.com/topics/${slug}/photos?client_id=${process.env.UNSPLASH_ACCESS_KEY}`
-//     );
-//     return response.json();
-//   } catch (error) {
-//     throw new Error("Network response was not ok");
-//   }
-// };
 

@@ -34,16 +34,12 @@ const columns: GridColDef<Film>[] = [
 
 export default function FilmTable({ films }: { films: Films }) {
   return (
-    <Container>
-      <Box sx={{ width: "100%" }}>
-        <DataGrid
-          rows={films.results}
-          getRowId={(row) => row.episode_id}
-          loading={!films.results.length}
-          columns={columns}
-          hideFooter
-        />
-      </Box>
-    </Container>
+    <DataGrid
+      rows={films.results}
+      getRowId={(row) => row.episode_id}
+      loading={!films.results.length}
+      columns={columns}
+      hideFooter 
+    />
   );
 }
