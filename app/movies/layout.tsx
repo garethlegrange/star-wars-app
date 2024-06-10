@@ -1,5 +1,5 @@
-import { AppBar } from "@mui/material";
 import Box from "@mui/material/Box";
+import Navbar from "@/components/Navbar";
 
 export default function MoviesLayout({
   children,
@@ -13,9 +13,7 @@ export default function MoviesLayout({
       gap: 4,
       pb: 4,
     }}>
-      <AppBar position="sticky">
-        myMovies
-      </AppBar>
+      <Navbar />
       <main>{children}</main>
     </Box>
   );

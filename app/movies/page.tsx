@@ -2,19 +2,18 @@
 
 import { useFetchFilms } from "@/hooks";
 import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
 import FilmTable from "@/components/FilmTable";
 import Image from "next/image";
-import logo from "@/public/images/backgrounds/logo.png";
+import logo from "@/public/logo.png";
 import { Typography } from "@mui/material";
-import { useRouter } from "next/router";
+import MoviesLoader from "@/components/MoviesLoader";
 
 export default function Movies() {
   const { data: films, isPending, isError } = useFetchFilms();
 
   if (isError) return <Container>Error</Container>;
 
-  if (isPending) return <Container>Loading...</Container>;
+  if (isPending) return <MoviesLoader />;
 
   return (
     <>

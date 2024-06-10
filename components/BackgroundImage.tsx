@@ -1,32 +1,36 @@
+import Container from "@mui/material/Container";
 import Image from "next/image";
 
 const imgArray = [
+  "https://res.cloudinary.com/dqzbjbmr5/image/upload/v1717764111/bkhoa3qwy3dgyoagmgxs.png",
+  "https://res.cloudinary.com/dqzbjbmr5/image/upload/v1717764103/ctj5echt1bfrctzbxa7l.png",
+  "https://res.cloudinary.com/dqzbjbmr5/image/upload/v1717764103/twvaf1i56egzjkx89vne.png",
   "https://res.cloudinary.com/dqzbjbmr5/image/upload/v1717764098/dp45b3hyiicb3adi6avj.png",
-  "https://res.cloudinary.com/dqzbjbmr5/image/upload/v1717764098/dp45b3hyiicb3adi6avj.png",
-  "https://res.cloudinary.com/dqzbjbmr5/image/upload/v1717764098/dp45b3hyiicb3adi6avj.png",
-  "https://res.cloudinary.com/dqzbjbmr5/image/upload/v1717764098/dp45b3hyiicb3adi6avj.png",
+  "https://res.cloudinary.com/dqzbjbmr5/image/upload/v1717764108/g97p6gvyztm4nm2xpyou.png",
+  "https://res.cloudinary.com/dqzbjbmr5/image/upload/v1717764110/ekl46wg97idmyhvmgszh.png",
 ];
 
-export default function BackgroundImage(data: { episode_id: string; title: string }) {
+export default function BackgroundImage(data: {
+  episode_id: string;
+  title: string;
+}) {
   const { episode_id, title } = data;
 
   return (
-    <div className="bg-gradient-to-b from-transparent to-black min-h-dvh -z-10 absolut top-0">
+    <Container>
       <Image
-        src={imgArray[Number(episode_id)]}
-        alt={title}
+        src={imgArray[Number(episode_id) - 1]}
         placeholder="blur"
         blurDataURL="https://res.cloudinary.com/dqzbjbmr5/image/upload/v1717764098/dp45b3hyiicb3adi6avj.png"
-        quality={100}
-        fill
-        sizes="100vw"
+        alt={title}
+        width="800"
+        height="600"
         style={{
-          objectFit: "cover",
-          top: 0,
-          left: 0,
-          zIndex: -1,
+          width: "100%",
+          height: "auto",
+          borderRadius: "30px",
         }}
       />
-    </div>
+    </Container>
   );
 }

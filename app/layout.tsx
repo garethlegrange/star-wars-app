@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Providers from "@/components/Providers";
-import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
-import Box from "@mui/material/Box";
 
 export const metadata: Metadata = {
   title: "DigiCert Assesment",

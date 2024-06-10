@@ -1,48 +1,63 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { useFetchFilm, useFetchCharacters } from "@/hooks";
-import Image from "next/image";
-import imgSrc from "@/public/images/backgrounds/4.png";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-// import BackgroundImage from "@/components/BackgroundImage";
+import BackgroundImage from "@/components/BackgroundImage";
+import Link from "@mui/material/Link";
+import MoviesLoader from "@/components/MoviesLoader";
 
 export default function Movie({ params }: { params: { id: string } }) {
   const router = useRouter();
 
   const { data: film, isPending, isError } = useFetchFilm(params.id);
 
-  if (isError) return <p>Error</p>;
+  if (isError) return <Container>Error</Container>;
 
-  if (isPending) return <p>Loading...</p>;
+  if (isPending) return <MoviesLoader />;
 
   return (
     <>
-      <Container>
-        <Image src={imgSrc} alt="logo" className="w-full h-auto rounded-3xl" />
-      </Container>
+      <BackgroundImage title={film.title} episode_id={film.episode_id} />
 
       <Container
         maxWidth="md"
         className="bg-white relative rounded-3xl py-12 px-8 flex flex-col gap-4 -mt-32 drop-shadow-xl"
       >
-        <Button
-          variant="outlined"
-          type="button"
-          onClick={() => router.back()}
-          className="rounded-full"
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            justifyContent: "space-between",
+          }}
         >
-          Back
-        </Button>
+          <Typography variant="h2" className="font-bold text-4xl">
+            {film.title} ({new Date(film.release_date).getFullYear()})
+          </Typography>
 
-        <Typography variant="h2" className="font-bold text-4xl">
-          {film.title} ({new Date(film.release_date).getFullYear()})
-        </Typography>
+          <Link
+            role="button"
+            onClick={() => router.back()}
+            className="rounded-full cursor-pointer text-sm no-underline flex items-center text-slate-800 px-4 py-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="size-4"
+            >
+              <path
+                fillRule="evenodd"
+                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z"
+                clipRule="evenodd"
+              />
+            </svg>
+            Back
+          </Link>
+        </Box>
 
         <ul className="my-0">
           <li>Episode: {film.episode_id}</li>
@@ -58,24 +73,28 @@ export default function Movie({ params }: { params: { id: string } }) {
           Characters
         </Typography>
 
-        <ul className="mt-0">
-          {film.characters.map((character: any) => {
-            const characterUrlParts = character.split("/").filter(Boolean);
-            const characterId = characterUrlParts[characterUrlParts.length - 1];
-            return <Character key={characterId} id={characterId} />;
-          })}
-        </ul>
+        <Characters characters={film.characters} />
       </Container>
     </>
   );
 }
 
+const Characters = ({ characters }: { characters: any }) => {
+  return (
+    <ul className="mt-0">
+      {characters.map((character: any) => {
+        const characterUrlParts = character.split("/").filter(Boolean);
+        const characterId = characterUrlParts[characterUrlParts.length - 1];
+        return <Character key={characterId} id={characterId} />;
+      })}
+    </ul>
+  );
+};
+
 export const Character = ({ id }: { id: any }) => {
-  const { data: character, isPending, isError } = useFetchCharacters(id);
+  const { data: character } = useFetchCharacters(id);
 
-  if (isError) return <p>Error</p>;
-
-  if (isPending) return <p>Loading...</p>;
+  if (!character) return null;
 
   return (
     <>
