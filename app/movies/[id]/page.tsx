@@ -91,7 +91,7 @@ const Characters = ({ characters }: { characters: any }) => {
   );
 };
 
-export const Character = ({ id }: { id: any }) => {
+const Character = ({ id }: { id: any }) => {
   const { data: character } = useFetchCharacters(id);
 
   if (!character) return null;
